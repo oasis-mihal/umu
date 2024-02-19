@@ -1,0 +1,5 @@
+{
+    "pretty_name": "Visual Leak Detector",
+    "headers_dir": "include",
+    "libs_dir": "lib/Win64"
+}
