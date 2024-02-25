@@ -4,7 +4,6 @@ A Pip-style Package Manager for c++!
 ## Is this ready to use?
 No. More work has to be done before this is ready for beta builds.
 
-Only the download/install works right now, packages must be uninstalled and updated manually.
 No download server exists yet either, so you must create the package configs yourself.
 
 If you need this package, consider contributing to the project.
@@ -23,14 +22,18 @@ As a result, umu should be a small and simple to use executable that is easy to 
 
 Navigate to the root folder of your solution and run:
 ```
-umu umuenv
+umu create -v <my-cpp-version>
+```
+e.g.
+```
+umu create -v cpp_17
 ```
 
 ### Activating the umuenv:
 
 From the root folder of your solution:
 ```
-umuenv activate.bat
+umuenv\activate.bat
 ```
 
 ### Installing dependencies:
@@ -47,6 +50,20 @@ umu install <my-dependency>==1.0.1
 umu install -r requirements.umu
 ```
 requirements.umu follows a requirements.txt format
+
+### Viewing installed dependencies:
+```
+umu list
+```
+
+### Uninstalling dependencies:
+```
+umu uninstall <my-dependency>
+```
+or
+```
+umu uninstall <my-dependency>==1.0.1
+```
 
 ## Build tool integration
 

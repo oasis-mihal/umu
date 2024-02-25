@@ -11,11 +11,15 @@ from typing import Tuple
 
 import constants
 import handy_functions
+from VenvData import VenvData, PackageData
 from constants import Operators
 from package_config import PackageConfig, Version
 from version_code import VersionCode
 
-class InstallManager():
+class InstallManager:
+    def __init__(self, venv_data: VenvData):
+        self._venv_data = venv_data
+
     def get_platform(self):
         if platform.system() == "Windows":
             return "x64"
@@ -157,6 +161,9 @@ class InstallManager():
         venv_libs_path = os.path.join(self.get_venv_path(), "libs")
 
         root, dirs, files = next(os.walk(central_libs_path))
+
+        package_data = PackageData(config.name, version.version_code, files)
+        self._venv_data.add_package(package_data)
         # TODO: Ignore dirs for now
         for file in files:
             filepath = os.path.join(root, file)
@@ -228,7 +235,34 @@ class InstallManager():
         package_name, operator, version_code = self.parse_command(cmd)
         self.install_package_from_server(package_name, operator, version_code)
 
+    def uninstall_single(self, cmd):
+        package_name, operator, version_code = self.parse_command(cmd)
+        self.uninstall_package(package_name, operator, version_code)
 
+    def uninstall_package(self, package_name: str, operator: Operators, version_code: VersionCode):
+        package_data = self._venv_data.packages.get(package_name, None)
+        if package_data is None:
+            print(f"Skipping package {package_name} as it is not installed")
+            return False
+
+       # Unlink libs dir
+        venv_libs_path = os.path.join(self.get_venv_path(), "libs")
+
+        # TODO: Ignore dirs for now
+        for file in package_data.installed_lib_paths:
+
+            linked_file_path = os.path.join(venv_libs_path, file)
+            if os.path.exists(linked_file_path):
+                os.remove(linked_file_path)
+
+        # Unlink include dir
+        venv_include_path = os.path.join(self.get_venv_path(), "include", package_data.name)
+
+        if os.path.exists(venv_include_path):
+            os.rmdir(venv_include_path)
+
+        # Remove the package from the config
+        self._venv_data.remove_package(package_data.name)
 
 if __name__ == "__main__":
     install_mgr = InstallManager()

@@ -7,12 +7,13 @@ from version_code import VersionCode
 
 
 class Version:
-    def __init__(self, config: dict):
+    def __init__(self, version_code: VersionCode, config: dict):
         self._asset_url = config.get("asset_url", "")
         self._headers_dir = config.get("headers_dir", "include")
         self._libs_dir = config.get("libs_dir", "lib")
         self._is_zipped_folder = config.get("is_zipped_folder", False)
         self._platform_overrides = dict()
+        self._version_code = version_code
 
         platforms = config.get("platforms", dict())
         for platform_name, platform_config in platforms.items():
@@ -50,6 +51,9 @@ class Version:
         # Override the result if it is set per platform
         return platform_override.is_zipped_folder if platform_override.is_zipped_folder is not None else self._is_zipped_folder
 
+    @property
+    def version_code(self):
+        return self._version_code
 
 class PlatformOverride:
     def __init__(self, config: dict):
@@ -96,7 +100,7 @@ class PackageConfig:
 
         for version_number, version in versions.items():
             version_code = VersionCode(version_number)
-            self._versions[version_code] = Version(version)
+            self._versions[version_code] = Version(version_code, version)
 
         self._versions = dict(sorted(self._versions.items()))
 
