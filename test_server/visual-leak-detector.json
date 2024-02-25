@@ -1,0 +1,16 @@
+{
+    "name": "visual-leak-detector",
+    "pretty_name": "Visual Leak Detector",
+    "versions": {
+        "1.0.0": {
+            "rem": "We need a C++ version too!",
+            "asset_url": "http://localhost:8080/assets/visual-leak-detector_v1.0.0_x64.zip",
+            "headers_dir": "include",
+            "platforms": {
+                "x64": {
+                    "libs_dir": "lib/Win64"
+                }
+            }
+        }
+    }
+}
