@@ -1,4 +1,4 @@
-# umu
+# umu Package Manager
 A Pip-style Package Manager for c++!
 
 ## Is this ready to use?
@@ -13,7 +13,7 @@ If you need this package, consider contributing to the project.
 
 C++'s package management tools have long been clunky (environment variables), difficult to learn (cmake) or proprietary+buggy (NuGet). This is far removed from the smooth pipeline of package managers like pip.
 
-umu aims to close the ease of use gap between python and c++ and allow easier building and installation for both editors and automated build pipelines.
+umu aims to close the ease of use gap between python and c++ and allow easier building and installation for both editors and automated build pipelines; to become THE package manager for C++ - an ambitious task!
 
 As a result, umu should be a small and simple to use executable that is easy to integrate into most build systems.
 
