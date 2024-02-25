@@ -4,7 +4,8 @@ A Pip-style Package Manager for c++!
 ## Is this ready to use?
 No. More work has to be done before this is ready for beta builds.
 
-I repeat. This. Does. Not. Work. Yet.
+Only the download/install works right now, packages must be uninstalled and updated manually.
+No download server exists yet either, so you must create the package configs yourself.
 
 If you need this package, consider contributing to the project.
 
