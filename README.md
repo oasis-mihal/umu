@@ -42,8 +42,9 @@ umu install <my-dependency>
 ```
 or
 ```
-umu install <my-dependency>==1.0.1
+umu install "<my-dependency>==1.0.1"
 ```
+IMPORTANT: the quotes are needed for Windowss shell if you use the >= or <= operator without escaping them
 
 ### Installing a requirements.umu
 ```

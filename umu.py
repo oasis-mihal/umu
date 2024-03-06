@@ -18,12 +18,13 @@ create_subparser.add_argument('-v', '--cpp-version', required=True)
 
 ## INSTALL
 install_subparser = subparser.add_parser("install")
-install_subparser.add_argument('-r', required=False)
+install_subparser.add_argument('-r', type=str, required=False)
+install_subparser.add_argument('--force-reinstall', action=argparse.BooleanOptionalAction)
 install_subparser.add_argument('command', nargs='?')
 
 ## UNINSTALL
 uninstall_subparser = subparser.add_parser("uninstall")
-uninstall_subparser.add_argument('-r', required=False)
+uninstall_subparser.add_argument('-r', type=str, required=False)
 uninstall_subparser.add_argument('command', nargs='?')
 
 ## LIST
@@ -53,14 +54,13 @@ def entry():
         if args.r is not None:
             install_mgr.install_from_requirements(args.r)
         elif args.command is not None:
-            install_mgr.install_single(args.command)
+            install_mgr.install_single(args.command, args)
 
     elif args.operating_mode == "uninstall":
         venv_data = VenvData(venv_mgr.data_file_path)
         install_mgr = InstallManager(venv_data)
         if args.r is not None:
-            raise NotImplementedError()
-        #    install_mgr.install_from_requirements(args.r)
+            install_mgr.uninstall_from_requirements(args.r)
         elif args.command is not None:
             install_mgr.uninstall_single(args.command)
 

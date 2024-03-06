@@ -11,6 +11,16 @@
                     "libs_dir": "lib/Win64"
                 }
             }
+        },
+        "1.0.1": {
+            "rem": "We need a C++ version too!",
+            "asset_url": "http://localhost:8080/assets/visual-leak-detector_v1.0.1_x64.zip",
+            "headers_dir": "include",
+            "platforms": {
+                "x64": {
+                    "libs_dir": "lib/Win64"
+                }
+            }
         }
     }
 }
